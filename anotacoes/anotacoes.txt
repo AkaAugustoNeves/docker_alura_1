@@ -1,0 +1,39 @@
+-> docker exec -it {CONTAINER ID} bash      | libera o terminal do container para usar comandos
+-> docker stop $(docker container ls -q)    | para todos os containers
+----------------------------------------------------------
+basico docker file
+
+FROM node:14                -> imagem que será usada no container
+WORKDIR /app-node           ->
+ARG PORT_BUILD=6000         -> define variavel de ambiente em tempo de build de imagem
+ENV PORT=$PORT_BUILD        -> cria variavel de ambiente para dentro do container
+EXPOSE $PORT_BUILD          -> expoe porta
+COPY . .                    -> copia arquivos que estão na pasta para dentro do container
+RUN npm install             -> comando executado enquando a imagem tiver sendo criada
+ENTRYPOINT npm start        -> comando executado ao iniciar o container
+
+----------------------------------------------------------
+gerar imagem e build
+
+docker build    -> gerar imagem
+docker images   -> lista imagens
+docker run      -> gera container
+docker ps       -> lista containers
+
+dentro da pasta onde contem o Dockerfile
+
+-> docker build -t app-node:1.2 .
+-> docker run -p 9090:6000 app-node:1.2
+----------------------------------------------------------
+login docker hub
+
+-> docker login -u akaaugustoneves
+e coloca a senha
+
+---------------------------------------------------------
+subir imagem para docker hub
+
+crie um repositorio no docker hub com o nome da imagem
+
+-> docker tag app-node:1.2 akaaugustoneves/app-node:1.2
+-> docker push akaaugustoneves/app-node:1.2
