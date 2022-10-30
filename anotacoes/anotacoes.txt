@@ -1,5 +1,7 @@
--> docker exec -it {CONTAINER ID} bash      | libera o terminal do container para usar comandos
--> docker stop $(docker container ls -q)    | para todos os containers
+-> docker exec -it {CONTAINER ID} bash              | libera o terminal do container para usar comandos
+-> docker stop $(docker container ls -q)            | para todos os containers
+-> docker container rm $(docker container ls -aq)   | remove todos os containers
+-> docker rmi $(docker image ls -aq) --force        | remove todas as imagens
 ----------------------------------------------------------
 basico docker file
 
@@ -37,3 +39,20 @@ crie um repositorio no docker hub com o nome da imagem
 
 -> docker tag app-node:1.2 akaaugustoneves/app-node:1.2
 -> docker push akaaugustoneves/app-node:1.2
+
+----------------------------------------------------------
+-> docker run -it ubuntu bash | ubuntu em modo iterativo
+-> docker run -it -v C:\Users\augusto.lima\Desktop\cursos\docker\nodeserverexemple\volume:/app ubuntu bash
+-> docker run -it --mount type=bind,source=C:\Users\augusto.lima\Desktop\cursos\docker\nodeserverexemple\volume,target=/app ubuntu bash
+
+----------------------------------------------------------
+                    volumes
+
+-> docker volume ls
+-> docker volume create meu-volume
+-> docker run -it -v meu-volume:/app  ubuntu bash
+-> docker run -it --mount source=meu-volume,target=/app ubuntu bash
+
+-----------------------------------------------------------
+                    network
+
